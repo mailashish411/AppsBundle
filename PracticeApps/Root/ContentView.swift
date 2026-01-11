@@ -29,7 +29,7 @@ struct RootView: View {
     @State private var selected: PracticeApp
     @State private var running: PracticeApp?
 
-    init(initialSelected: PracticeApp = .contacts, initialRunning: PracticeApp? = nil) {
+    init(initialSelected: PracticeApp = .pokedex, initialRunning: PracticeApp? = nil) {
         _selected = State(initialValue: initialSelected)
         _running = State(initialValue: initialRunning)
     }
@@ -38,18 +38,18 @@ struct RootView: View {
         ZStack {
             if let running {
                 appRoot(for: running)
-                    .overlay(alignment: .topTrailing    ) {
-                        Button {
-                            withAnimation { self.running = nil }
-                        } label: {
-                            Image(systemName: "square.grid.2x2")
-                                .padding(10)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
-                                .padding()
-                        }
-                        .accessibilityLabel("Back to app picker")
-                    }
+//                    .overlay(alignment: .topTrailing    ) {
+//                        Button {
+//                            withAnimation { self.running = nil }
+//                        } label: {
+//                            Image(systemName: "square.grid.2x2")
+//                                .padding(10)
+//                                .background(.ultraThinMaterial)
+//                                .clipShape(Circle())
+//                                .padding()
+//                        }
+//                        .accessibilityLabel("Back to app picker")
+//                    }
 
             } else {
                 launcherView
@@ -96,7 +96,9 @@ struct RootView: View {
     private func appRoot(for app: PracticeApp) -> some View {
         switch app {
         case .pokedex:
-            PokemonListView()
+//            PokemonListView()
+//            PokemonListScreen()
+            PokedexAppView()
         case .contacts:
             ContactsView()
 
