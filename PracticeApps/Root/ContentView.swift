@@ -113,7 +113,8 @@ struct RootView: View {
             MailComposeView()
             
         case .crypto:
-            CryptoListView()
+//            CryptoListView()
+            CoinListView()
         }
     }
 }

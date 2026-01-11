@@ -41,11 +41,7 @@ struct CryptoListView: View {
             }
             .navigationTitle("Cryptos")
             .navigationDestination(for: Crypto.self) { crypto in
-                VStack {
-                    RemoteImageView(urlString: crypto.image, size: 100)
-                    Text(crypto.name)
-                    Text("\(crypto.currentPrice)")
-                }
+                CryptoDetailView(crypto: crypto)
                 .navigationTitle(crypto.name)
             }
         }
