@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - 1) Your app choices
 enum PracticeApp: String, CaseIterable, Identifiable {
+    case pokedex = "Pokedex"
     case contacts = "Contacts"
     case bankAccounts = "Bank Accounts"
     case movies = "Movies"
@@ -94,6 +95,8 @@ struct RootView: View {
     @ViewBuilder
     private func appRoot(for app: PracticeApp) -> some View {
         switch app {
+        case .pokedex:
+            PokemonListView()
         case .contacts:
             ContactsView()
 

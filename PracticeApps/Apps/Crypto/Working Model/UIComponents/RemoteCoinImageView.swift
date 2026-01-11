@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RemoteCoinImageView: View {
+struct RemoteImageView: View {
     let urlString: String
     let size: CGFloat
 

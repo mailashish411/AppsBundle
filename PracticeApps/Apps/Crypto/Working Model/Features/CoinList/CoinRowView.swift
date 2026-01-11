@@ -15,7 +15,7 @@ struct CoinRowView: View {
         HStack(spacing: 12) {
 
             // Icon (fixed)
-            RemoteCoinImageView(urlString: coin.image, size: 36)
+            RemoteImageView(urlString: coin.image, size: 36)
                 .frame(width: 36, height: 36)
 
             // Name + Symbol (flexible, but protected)

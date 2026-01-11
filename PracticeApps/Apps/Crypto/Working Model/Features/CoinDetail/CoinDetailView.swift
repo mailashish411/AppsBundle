@@ -20,7 +20,7 @@ struct CoinDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(spacing: 14) {
-                    RemoteCoinImageView(urlString: viewModel.coin.image, size: 64)
+                    RemoteImageView(urlString: viewModel.coin.image, size: 64)
 
                     VStack(alignment: .leading) {
                         Text(viewModel.coin.name)
