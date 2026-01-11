@@ -16,6 +16,7 @@ enum PracticeApp: String, CaseIterable, Identifiable {
     case music = "Music"
     case weather = "Weather"
     case mailComposeView = "Mail Compose View"
+    case crypto = "Coin Gecko"
 
     var id: String { rawValue }
 }
@@ -36,7 +37,7 @@ struct RootView: View {
         ZStack {
             if let running {
                 appRoot(for: running)
-                    .overlay(alignment: .topLeading) {
+                    .overlay(alignment: .topTrailing    ) {
                         Button {
                             withAnimation { self.running = nil }
                         } label: {
@@ -110,6 +111,9 @@ struct RootView: View {
             
         case .mailComposeView:
             MailComposeView()
+            
+        case .crypto:
+            CryptoListView()
         }
     }
 }
@@ -139,3 +143,4 @@ private func screen(_ title: String) -> some View {
 #Preview("Running Contacts") {
     RootView(initialSelected: .contacts, initialRunning: .contacts)
 }
+
