@@ -21,3 +21,6 @@ fastlane/test_output/
 
 # Local secrets (do not commit)
 Config/Secrets.xcconfig
+# Secrets / API Keys
+Secrets.plist
+**/Secrets.plist

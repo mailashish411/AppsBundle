@@ -96,9 +96,7 @@ struct RootView: View {
     private func appRoot(for app: PracticeApp) -> some View {
         switch app {
         case .pokedex:
-//            PokemonListView()
-//            PokemonListScreen()
-            PokedexAppView()
+            PokemonAppView()
         case .contacts:
             ContactsView()
 
@@ -112,7 +110,7 @@ struct RootView: View {
             MusicView()
 
         case .weather:
-            WeatherView()
+            WeatherAppView()
             
         case .mailComposeView:
             MailComposeView()
@@ -131,7 +129,6 @@ struct RootView: View {
 struct BankAccountsView: View { var body: some View { screen("Bank Accounts") } }
 struct MoviesView: View { var body: some View { screen("Movies") } }
 struct MusicView: View { var body: some View { screen("Music") } }
-struct WeatherView: View { var body: some View { screen("Weather") } }
 
 private func screen(_ title: String) -> some View {
     ZStack {
