@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DD56ADB32F14C38D00768D71 /* SharedKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD56ADB22F14C38D00768D71 /* SharedKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		DD56ABDC2F0D806F00768D71 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD56ADB32F14C38D00768D71 /* SharedKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 				DD56ABD02F0D806E00768D71 /* PracticeApps */,
 				DD56ABDE2F0D806F00768D71 /* PracticeAppsTests */,
 				DD56ABE82F0D806F00768D71 /* PracticeAppsUITests */,
+				DD56ADB12F14C38D00768D71 /* Frameworks */,
 				DD56ABCF2F0D806E00768D71 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +96,13 @@
 				DD56ABE52F0D806F00768D71 /* PracticeAppsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DD56ADB12F14C38D00768D71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +125,7 @@
 			);
 			name = PracticeApps;
 			packageProductDependencies = (
+				DD56ADB22F14C38D00768D71 /* SharedKit */,
 			);
 			productName = PracticeApps;
 			productReference = DD56ABCE2F0D806E00768D71 /* PracticeApps.app */;
@@ -195,6 +209,9 @@
 			);
 			mainGroup = DD56ABC52F0D806E00768D71;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DD56ADB02F14C37400768D71 /* XCLocalSwiftPackageReference "Packages/SharedKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DD56ABCF2F0D806E00768D71 /* Products */;
 			projectDirPath = "";
@@ -570,6 +587,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		DD56ADB02F14C37400768D71 /* XCLocalSwiftPackageReference "Packages/SharedKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SharedKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD56ADB22F14C38D00768D71 /* SharedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD56ADB02F14C37400768D71 /* XCLocalSwiftPackageReference "Packages/SharedKit" */;
+			productName = SharedKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD56ABC62F0D806E00768D71 /* Project object */;
 }

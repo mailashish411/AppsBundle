@@ -1,19 +1,19 @@
 //
 //  APIClientProtocol.swift
-//  PracticeApps
+//  SharedKit
 //
-//  Created by Ashish Shaik on 1/10/26.
+//  Created by Ashish Shaik on 1/12/26.
 //
 
 import Foundation
 
-protocol APIClientProtocol {
+public protocol APIClientProtocol {
     var session: URLSession { get }
     var decoder: JSONDecoder { get }
     func request<T: Decodable>(_ url: URL, as type: T.Type) async throws -> T
 }
 
-extension APIClientProtocol {
+public extension APIClientProtocol {
     func request<T: Decodable>(_ url: URL, as type: T.Type) async throws -> T {
         let (data, response) = try await session.data(from: url)
         try validateHTTP(response: response, data: data)

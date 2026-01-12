@@ -7,9 +7,11 @@
 
 import SwiftUI
 import UIKit
+import SharedKit
 
 // MARK: - 1) Your app choices
 enum PracticeApp: String, CaseIterable, Identifiable {
+    case pokedexV2 = "Pokedex v2"
     case pokedex = "Pokedex"
     case contacts = "Contacts"
     case bankAccounts = "Bank Accounts"
@@ -59,6 +61,7 @@ struct RootView: View {
 
     private var launcherView: some View {
         VStack(spacing: 16) {
+            
             Text("Practice Apps")
                 .font(.largeTitle.bold())
 
@@ -95,6 +98,8 @@ struct RootView: View {
     @ViewBuilder
     private func appRoot(for app: PracticeApp) -> some View {
         switch app {
+        case .pokedexV2:
+            PokedexAppView()
         case .pokedex:
             PokemonAppView()
         case .contacts:

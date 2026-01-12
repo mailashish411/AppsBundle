@@ -5,7 +5,11 @@
 //  Created by Ashish Shaik on 1/10/26.
 //
 import Foundation
+import SharedKit
+
 enum CoinGeckoEndpoint: Endpoint {
+    
+    
     case markets(page: Int, perPage: Int)
     case coinDetail(id: String)
 
@@ -16,6 +20,10 @@ enum CoinGeckoEndpoint: Endpoint {
         case .coinDetail(let id):
             return "/api/v3/coins/\(id)"
         }
+    }
+    
+    var host: String {
+        return "api.coingecko.com"
     }
 
     var queryItems: [URLQueryItem] {

@@ -8,14 +8,6 @@
 import SwiftUI
 import Observation
 
-// MARK: - Async UI State (same idea as your Pokédex)
-//enum LoadState<Value>: Equatable where Value: Equatable {
-//    case idle
-//    case loading
-//    case success(Value)
-//    case failure(String)
-//}
-
 // MARK: - App Entry View
 struct WeatherAppView: View {
     @State private var vm = WeatherSearchVM()
@@ -471,6 +463,7 @@ struct WeatherAPI: WeatherServicing {
 }
 
 // MARK: - ViewModels
+import SharedKit
 @Observable
 final class WeatherSearchVM {
     let service: WeatherServicing

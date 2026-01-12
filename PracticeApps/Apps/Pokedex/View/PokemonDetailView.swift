@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SharedKit
 
 // MARK: - Detail View
 struct PokemonDetailView: View {

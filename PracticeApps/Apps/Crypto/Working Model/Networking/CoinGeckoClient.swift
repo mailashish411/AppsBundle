@@ -1,4 +1,5 @@
 import Foundation
+import SharedKit
 
 protocol CoinAPIClientProtocol {
     func fetchMarkets(page: Int, perPage: Int) async throws -> [CoinMarket]

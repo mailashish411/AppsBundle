@@ -1,17 +1,17 @@
 //
 //  APIError.swift
-//  PracticeApps
+//  SharedKit
 //
-//  Created by Ashish Shaik on 1/10/26.
+//  Created by Ashish Shaik on 1/12/26.
 //
 
 import Foundation
 
-enum APIError: LocalizedError {
+public enum APIError: LocalizedError {
     case httpError(statusCode: Int, bodySnippet: String)
     case decodingFailed(underlying: Error, bodySnippet: String)
 
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case let .httpError(code, snippet):
             return "HTTP \(code). Response: \(snippet)"

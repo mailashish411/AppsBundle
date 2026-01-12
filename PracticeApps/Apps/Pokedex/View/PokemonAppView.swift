@@ -5,6 +5,7 @@
 //  Created by Ashish Shaik on 1/12/26.
 //
 import SwiftUI
+import SharedKit
 
 // MARK: - App View
 struct PokemonAppView: View {
