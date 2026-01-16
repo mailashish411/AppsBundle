@@ -33,9 +33,32 @@
 		DD56ABE52F0D806F00768D71 /* PracticeAppsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PracticeAppsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DD56AE9B2F1A0E7C00768D71 /* Exceptions for "PracticeApps" folder in "PracticeApps" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Apps/Templates/AnalyticsManager.swift,
+				"Apps/Templates/Cache-Actor-based cache with in-flight deduplication + tests .swift",
+				Apps/Templates/ConcurrentAttachmentsDownload.swift,
+				Apps/Templates/DraftEmail.swift,
+				Apps/Templates/ImageLoaderDisk.swift,
+				"Apps/Templates/Load State + cancellation + tests.swift",
+				Apps/Templates/LRUCache.swift,
+				Apps/Templates/OfflineEmailSync.swift,
+				Apps/Templates/PaymentsArchitecture.swift,
+				"Apps/Templates/Sys Design/Generic Template/SampleEx.swift",
+				"Apps/Templates/Sys Design/Generic Template/SysDesign-Requirements.swift",
+			);
+			target = DD56ABCD2F0D806E00768D71 /* PracticeApps */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DD56ABD02F0D806E00768D71 /* PracticeApps */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DD56AE9B2F1A0E7C00768D71 /* Exceptions for "PracticeApps" folder in "PracticeApps" target */,
+			);
 			path = PracticeApps;
 			sourceTree = "<group>";
 		};
