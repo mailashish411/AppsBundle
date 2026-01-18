@@ -38,6 +38,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Apps/Templates/AnalyticsManager.swift,
+				Apps/Templates/APIClientProtocol.swift,
 				"Apps/Templates/Cache-Actor-based cache with in-flight deduplication + tests .swift",
 				Apps/Templates/ConcurrentAttachmentsDownload.swift,
 				Apps/Templates/DraftEmail.swift,

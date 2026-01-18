@@ -23,3 +23,4 @@ final class CoinGeckoClient: CoinAPIClientProtocol, APIClientProtocol {
         try await request(CoinGeckoEndpoint.coinDetail(id: id), as: CoinDetail.self)
     }
 }
+
