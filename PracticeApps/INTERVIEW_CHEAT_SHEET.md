@@ -348,7 +348,7 @@ extension Color {
         case 3: // RGB (12-bit)
             (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
         case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         case 8: // ARGB (32-bit)
             (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
@@ -372,5 +372,181 @@ struct ResignKeyboardOnDragGesture: ViewModifier {
     func body(content: Content) -> some View {
         content.gesture(gesture)
     }
+}
+```
+
+## 11. AsyncStream (Delegate -> Async)
+
+Bridge legacy delegate patterns (like CoreLocation) into modern async for-loops.
+
+```swift
+import CoreLocation
+
+class LocationManager {
+    // 1. Create a Stream
+    lazy var locationStream: AsyncStream<CLLocation> = {
+        AsyncStream { continuation in
+             self.continuation = continuation
+        }
+    }()
+    
+    private var continuation: AsyncStream<CLLocation>.Continuation?
+    private let manager = CLLocationManager()
+    
+    init() {
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        
+        // Ensure stream is cleaned up
+        continuation?.onTermination = { @Sendable _ in
+            // Stop updates if needed
+        }
+    }
+    
+    func start() {
+        manager.startUpdatingLocation()
+    }
+}
+
+extension LocationManager: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let loc = locations.last else { return }
+        // 2. Yield values
+        continuation?.yield(loc)
+    }
+}
+
+// Usage
+// for await location in locationManager.locationStream { ... }
+```
+
+## 12. CheckedContinuation (Callback -> Async)
+
+Wrap older callback-based APIs into `async throws` functions. ALWAYS resume exactly once!
+
+```swift
+func fetchLegacyData(completion: @escaping (Result<Data, Error>) -> Void) {
+    // Legacy SDK call
+}
+
+func fetchModernData() async throws -> Data {
+    return try await withCheckedThrowingContinuation { continuation in
+        fetchLegacyData { result in
+            switch result {
+            case .success(let data):
+                continuation.resume(returning: data)
+            case .failure(let error):
+                continuation.resume(throwing: error)
+            }
+        }
+    }
+}
+```
+
+## 13. Task.detached & Priorities
+
+Use `Task` (inherits priority/context) by default. Use `detached` ONLY for background work unrelated to current context (like analytics logging).
+
+```swift
+func performWork() async {
+    // 1. Inherits priority (e.g. .userInitiated)
+    Task {
+        await expensiveOperation()
+    }
+    
+    // 2. Specific Priority
+    Task(priority: .background) {
+        await prefetchImages() 
+    }
+    
+    // 3. Detached (Does NOT inherit Actor context or Priority)
+    Task.detached(priority: .utility) {
+        await specializedLogger.log("Action performed")
+    }
+}
+```
+
+## 14. Property Wrap (Quick Ref)
+
+Correct usage of SwiftUI data flow.
+
+| Wrapper | Usage |
+| :--- | :--- |
+| `@State` | Local private value (Int, Bool, String). Ownership stay in View. |
+| `@StateObject` | Initialize a ViewModel/Object **once**. `_ = StateObject(wrappedValue: VM())` |
+| `@ObservedObject` | Watch an object passed from parent. **Do NOT init here.** |
+| `@EnvironmentObject` | Globals injected via `.environmentObject()`. |
+| `@Binding` | Read/Write access to a value owned by a parent. |
+
+## 15. GeometryReader (Size & Frames)
+
+Get parent size or coordinate space frames.
+
+```swift
+GeometryReader { geo in
+   // Parent Size
+   let width = geo.size.width
+   
+   // Frame in Global (Screen) Space
+   let frame = geo.frame(in: .global)
+   
+   // Frame in Local Space
+   let local = geo.frame(in: .local)
+   
+   Text("Width: \(width)")
+}
+.frame(height: 200) // GeometryReader fills available space, so limit it!
+```
+
+## 16. MatchedGeometryEffect (Hero Animations)
+
+Smoothly transition views between hierarchies.
+
+```swift
+struct HeroView: View {
+    @Namespace var ns
+    @State var isZoomed = false
+    
+    var body: some View {
+        VStack {
+            if isZoomed {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.red)
+                    .matchedGeometryEffect(id: "shape", in: ns)
+                    .frame(width: 300, height: 300)
+                    .onTapGesture { withAnimation { isZoomed.toggle() } }
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.red)
+                    .matchedGeometryEffect(id: "shape", in: ns)
+                    .frame(width: 50, height: 50)
+                    .onTapGesture { withAnimation { isZoomed.toggle() } }
+            }
+        }
+    }
+}
+```
+
+## 17. PreferenceKey (Child -> Parent Data)
+
+Pass data UP the view hierarchy (opposite of Environment).
+
+```swift
+// 1. Define Key
+struct ScrollOffsetKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+// 2. Child (emit value)
+GeometryReader { geo in
+    Color.clear.preference(key: ScrollOffsetKey.self, value: geo.frame(in: .global).minY)
+}
+
+// 3. Parent (read value)
+.onPreferenceChange(ScrollOffsetKey.self) { value in
+    print("Scroll Offset: \(value)")
 }
 ```
